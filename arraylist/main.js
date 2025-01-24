@@ -34,5 +34,5 @@ const array=new Arraylist();
 array.add(54);
 array.add("asd");
 array.add({nev:"Lajos"})
-console.log(array[2]);
+console.log(array[1]);
 
