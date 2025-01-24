@@ -5,6 +5,7 @@ class Arraylist{
     */
     #count;
     #list;
+    #artab
     get Count(){
         return this.#count;
     }
@@ -12,8 +13,9 @@ class Arraylist{
         this.#list={};
         this.#count=0;
     }
-    constructor(){
+    constructor(par=undefined){
         this.clear();
+        this.#artab=par
     }
     add(item){
         const index=this.#count
@@ -40,6 +42,7 @@ console.log(array[1]);
 
 class HTMLTable extends HTMLElement{
     #tbody
+
     constructor(){
         super();
     }
