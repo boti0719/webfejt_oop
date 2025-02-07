@@ -56,6 +56,14 @@ class DataManager{
         }
         this.#updateCall(arr);
     }
+    filter(filterCallBack){
+        const arr=[];
+        for(const pers of this.#array){
+            if(filterCallBack(pers))
+                arr.push(pers);
+        }
+        this.#updateCall(arr);
+    }
 }
 class DataTable{
     /**
@@ -81,8 +89,24 @@ class DataTable{
         });
     }
 }
-const data= new DataManager([{nev:"Irén", eletkor:112},{nev:"Peti", eletkor:12}]);
+const data= new DataManager();
 const tab = new DataTable(data);
-data.add({nev:"Lajos", eletkor:45});
-//data.fiterName("Irén");
-//data.filterAge(12);
+
+const file=document.createElement("input");
+file.setAttribute("type", "file");
+file.addEventListener("change", (e)=>{
+    const fileReader=new FileReader();
+    let text;
+    fileReader.readAsText(e.target.files[0]);
+    fileReader.onload=()=>{
+        text=fileReader.result;
+        const ez=text.split("\n");
+        for(const sor of ez){
+            const datas = sor.split(";");
+            const person={nev:datas[0], eletkor:Number(datas[1])};
+            data.add(person);
+        }
+        //data.filter((pers)=>pers.eletkor===23);
+    }
+})
+document.body.appendChild(file);
